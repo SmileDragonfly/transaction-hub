@@ -1,24 +1,4 @@
 # FRS for Transaction Hub
-<!-- TOC -->
-* [FRS for Transaction Hub](#frs-for-transaction-hub)
-  * [Version](#version)
-  * [Abbreviation](#abbreviation)
-  * [I. Technology](#i-technology)
-  * [II. Hub APIs](#ii-hub-apis)
-  * [III. Hub Logic](#iii-hub-logic)
-    * [1. API](#1-api)
-      * [1.1. Get working key](#11-get-working-key)
-      * [1.2. Request payment](#12-request-payment)
-      * [1.3. Transaction check](#13-transaction-check)
-      * [1.4. Balance Inquiry](#14-balance-inquiry)
-      * [1.5. Add VT](#15-add-vt)
-      * [1.6. Add PT](#16-add-pt)
-    * [2. Schedule Jobs](#2-schedule-jobs)
-      * [2.1. Get working key (interval=VT.Working key exchange interval)](#21-get-working-key--intervalvtworking-key-exchange-interval-)
-      * [2.2. Cash Position (interval=VT.HealCheck interval)](#22-cash-position--intervalvthealcheck-interval-)
-    * [3. Database package](#3-database-package)
-    * [4. Processor communication package](#4-processor-communication-package)
-<!-- TOC -->
 ## Version
 | Date       | Version | Author | Description     |
 |------------|---------|--------|-----------------|
@@ -28,11 +8,17 @@
 - Virtual Terminal: VT
 - Working Key: WK
 - Serial Number: SN
-## I. Technology
+- Average time of success transaction: ATT
+- Min time delay between transactions: MinTDL
+- Max time delay between transactions: MaxTDL
+- Timeout for request send from physical terminal to virtual terminal: PTTO
+- Timeout for request send from virtual terminal to processor: VTTO
+## I. Overview
 - Language: Golang
 - Database: MS-SQL
-## II. Hub APIs
-- APIs for PT
+- Total estimation time: 154h
+## II. Transaction Hub APIs
+- APIs for PT (Post API.docx)
   - Get working key
   - Request payment
   - Check transaction
@@ -49,8 +35,7 @@
       - Protocol Type
       - Delay time between transactions
       - HealCheck interval
-      - Timeout for request from PT
-      - Timeout for request send to processor
+      - Timeout for request send to processor (VTTO)
       - Working key authorization (Fixed value)
       - Min time delay between transactions (MinTDL)
       - Max time delay between transactions (MaxTDL)
@@ -70,10 +55,10 @@
       - Timeout for request from VT
       - Supported protocol
       - Average time of success transaction (ATT)
-## III. Hub Logic
+## III. Transaction Hub Modules
 ### 1. API
 #### 1.1. Get working key
-- Flow: PT SN => PT ID => VT ID => Get VT WK from DB
+- Draft flow: PT SN => PT ID => VT ID => Get VT WK from DB
   - if WK == NULL: Call processor to get WK for this VT => Update WK to DB => return WK
   - else: return WK
 - Estimate:
@@ -81,11 +66,11 @@
   - Unit test: 4h
   - Total: 14h
 #### 1.2. Request payment
-- Flow: 
+- Draft flow: 
   - Provider thread: Push request to queue => Wait for reponse
-  - Consumer thread: Receive message => Get VT ID from PT SN => Check number pending message of VT => Calculate time to accept or reject request 
-    - If rejected: Send reject response to provider thread
-    - If accepted: When it picks message from queue:
+  - Consumer thread: Receive message => Get VT ID from PT SN => Check number pending message of VT (n) => Calculate time to wait (ATT*n + MaxTDL*(n-1)) to accept or reject request 
+    - If time to wait > (PTTO - ATT): Send reject response to provider thread
+    - else: When it picks message from queue:
       - Calculate time need to delay (TDL): Random(MinTDL, MaxTDL) - (now() - time(last VT TXN))
       - Check (message received time + PTTO) < now() + TDL + ATT:
         - False: Send response reject process request because not enough time
@@ -97,38 +82,38 @@
   - Unit test: 7h
   - Total: 35h
 #### 1.3. Transaction check
-- Flow: Parse request => Query DB to check TXN info and TXN status => Return response
+- Draft flow: Parse request => Query DB to check TXN info and TXN status => Return response
 - Estimate:
   - Implement: 7h
   - Unit test: 4h
   - Total: 11h
 #### 1.4. Balance Inquiry
-- Flow: Parse request => Same logic to payment request (Call to processor and change some fields) => Return response
+- Draft flow: Parse request => Same logic to payment request (Call to processor and change some fields) => Return response
 - Estimate:
   - Implement: 7h
   - Unit test: 4h
   - Total: 11h
 #### 1.5. Add VT
-- Flow: Parse request => Update DB => Return response
+- Draft flow: Parse request => Update DB => Return response
 - Estimate:
   - Implement: 4h
   - Unit test: 2h
   - Total: 6h
 #### 1.6. Add PT
-- Flow: Parse request => Update DB => Return response
+- Draft flow: Parse request => Update DB => Return response
 - Estimate:
   - Implement: 4h
   - Unit test: 2h
   - Total: 6h
 ### 2. Schedule Jobs
 #### 2.1. Get working key (interval=VT.Working key exchange interval)
-- Flow: Send request to processor to get WK for VT => Update WK to DB
+- Draft flow: Send request to processor to get WK for VT => Update WK to DB
 - Estimate:
   - Implement: 7h
   - Unit test: 4h
   - Total: 11h
 #### 2.2. Cash Position (interval=VT.HealCheck interval)
-- Flow: Check VT balance < VT.LowAmount => Send request to processor to do Cash Position (random [1000, 1500, 1800])
+- Draft flow: Check VT balance < VT.LowAmount => Send request to processor to do Cash Position (random [1000, 1500, 1800])
 => Check response => Success => Update VT Cassette infomation
 - Estimate:
   - Implement: 7h
