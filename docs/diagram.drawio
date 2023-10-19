@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-10-19T09:23:11.678Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" etag="YS0RlQE-sVKPZcyYntlS" version="22.0.5" type="github">
+<mxfile host="app.diagrams.net" modified="2023-10-19T09:38:35.279Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" etag="9hLMAxemtpO5PT6XiU55" version="22.0.5" type="github" pages="2">
   <diagram id="kgpKYQtTHZ0yAKxKKP6v" name="GetWorkingKey">
     <mxGraphModel dx="1434" dy="749" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -107,6 +107,57 @@
               <mxPoint x="420" y="735" />
             </Array>
           </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram name="Payment" id="cC2Hx8-cBnKY9rBRwVhu">
+    <mxGraphModel dx="1434" dy="749" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="QlflWRz0XI6yLBNZDTP6-0" />
+        <mxCell id="QlflWRz0XI6yLBNZDTP6-1" parent="QlflWRz0XI6yLBNZDTP6-0" />
+        <mxCell id="QlflWRz0XI6yLBNZDTP6-2" value="Payment" style="swimlane;html=1;childLayout=stackLayout;startSize=20;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;fontFamily=Verdana;fontSize=12;align=center;swimlaneLine=1;arcSize=15;" vertex="1" parent="QlflWRz0XI6yLBNZDTP6-1">
+          <mxGeometry x="20" y="40" width="800" height="830" as="geometry" />
+        </mxCell>
+        <mxCell id="QlflWRz0XI6yLBNZDTP6-3" value="Terminal" style="swimlane;html=1;startSize=20;" vertex="1" parent="QlflWRz0XI6yLBNZDTP6-2">
+          <mxGeometry y="20" width="120" height="810" as="geometry" />
+        </mxCell>
+        <mxCell id="QlflWRz0XI6yLBNZDTP6-4" value="" style="ellipse;html=1;shape=startState;fillColor=#000000;strokeColor=#ff0000;" vertex="1" parent="QlflWRz0XI6yLBNZDTP6-3">
+          <mxGeometry x="40" y="270" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="QlflWRz0XI6yLBNZDTP6-28" value="" style="edgeStyle=orthogonalEdgeStyle;html=1;verticalAlign=bottom;endArrow=open;endSize=8;strokeColor=#ff0000;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="QlflWRz0XI6yLBNZDTP6-2" source="QlflWRz0XI6yLBNZDTP6-4" target="QlflWRz0XI6yLBNZDTP6-8">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="50" y="390" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QlflWRz0XI6yLBNZDTP6-6" value="Transaction Hub" style="swimlane;html=1;startSize=20;" vertex="1" parent="QlflWRz0XI6yLBNZDTP6-2">
+          <mxGeometry x="120" y="20" width="450" height="810" as="geometry">
+            <mxRectangle x="120" y="20" width="40" height="810" as="alternateBounds" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="QlflWRz0XI6yLBNZDTP6-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="QlflWRz0XI6yLBNZDTP6-6" source="QlflWRz0XI6yLBNZDTP6-8" target="QlflWRz0XI6yLBNZDTP6-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="QlflWRz0XI6yLBNZDTP6-8" value="Parse request" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="QlflWRz0XI6yLBNZDTP6-6">
+          <mxGeometry x="52.5" y="300" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="QlflWRz0XI6yLBNZDTP6-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="QlflWRz0XI6yLBNZDTP6-6" source="QlflWRz0XI6yLBNZDTP6-10" target="QlflWRz0XI6yLBNZDTP6-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="QlflWRz0XI6yLBNZDTP6-10" value="Get virtual terminal ID by serial numer" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="QlflWRz0XI6yLBNZDTP6-6">
+          <mxGeometry x="30" y="380" width="145" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Oh-PIRRrGAAFRPsMC6vg-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="QlflWRz0XI6yLBNZDTP6-6" source="QlflWRz0XI6yLBNZDTP6-11" target="Oh-PIRRrGAAFRPsMC6vg-0">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="QlflWRz0XI6yLBNZDTP6-11" value="Push request to virtual terminal queue" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="QlflWRz0XI6yLBNZDTP6-6">
+          <mxGeometry x="32.5" y="460" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Oh-PIRRrGAAFRPsMC6vg-0" value="Set timeout for request(60s)" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="QlflWRz0XI6yLBNZDTP6-6">
+          <mxGeometry x="32.5" y="540" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="QlflWRz0XI6yLBNZDTP6-26" value="Processor" style="swimlane;html=1;startSize=20;" vertex="1" parent="QlflWRz0XI6yLBNZDTP6-2">
+          <mxGeometry x="570" y="20" width="230" height="810" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
