@@ -23,38 +23,6 @@
   - Request payment
   - Check transaction
   - Balance Inquiry
-- APIs for web
-  - Add VT and configuration for VT:
-    - Parameters:
-      - VT ID
-      - Processor ID
-      - Max PT
-      - Cassette Info
-      - Low Amount
-      - Working key exchange interval
-      - Protocol Type
-      - Delay time between transactions
-      - HealCheck interval
-      - Timeout for request send to processor (VTTO)
-      - Working key authorization (Fixed value)
-      - Min time delay between transactions (MinTDL)
-      - Max time delay between transactions (MaxTDL)
-  - Add PT and configuration for PT:
-    - Parameters:
-      - PT ID
-      - VT ID
-      - PT Serial Number
-      - Timeout for request send to VT (PTTO)
-  - Add Processor:
-    - Parameters:
-      - Name
-      - Server IP
-      - Server Port
-      - Enable Staging
-      - Enable TLS
-      - Timeout for request from VT
-      - Supported protocol
-      - Average time of success transaction (ATT)
 ## III. Transaction Hub Modules
 ### 1. API
 #### 1.1. Get working key
