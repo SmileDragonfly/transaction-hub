@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Paygreen-Hub.iml" filepath="$PROJECT_DIR$/.idea/Paygreen-Hub.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/transaction-hub.iml" filepath="$PROJECT_DIR$/.idea/transaction-hub.iml" />
     </modules>
   </component>
 </project>
