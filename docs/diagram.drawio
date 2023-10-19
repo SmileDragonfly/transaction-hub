@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-10-19T11:23:20.372Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" etag="wTYiHegOKyyYYoRZVdX8" version="22.0.5" type="github" pages="2">
+<mxfile host="app.diagrams.net" modified="2023-10-19T11:31:57.373Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" etag="lxGnsL9mdxGXXAca6RAf" version="22.0.5" type="github" pages="2">
   <diagram id="kgpKYQtTHZ0yAKxKKP6v" name="GetWorkingKey">
     <mxGraphModel dx="1434" dy="749" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -210,17 +210,19 @@
         <mxCell id="rwo7LS5GwFOTffDNCNRn-2" value="Consumer Thread" style="swimlane;html=1;startSize=20;container=0;" vertex="1" parent="rwo7LS5GwFOTffDNCNRn-7">
           <mxGeometry x="500" width="460" height="989.9999999999999" as="geometry" />
         </mxCell>
-        <mxCell id="rwo7LS5GwFOTffDNCNRn-71" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="rwo7LS5GwFOTffDNCNRn-2" source="rwo7LS5GwFOTffDNCNRn-49" target="rwo7LS5GwFOTffDNCNRn-50">
+        <mxCell id="rwo7LS5GwFOTffDNCNRn-123" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="rwo7LS5GwFOTffDNCNRn-2" source="rwo7LS5GwFOTffDNCNRn-49" target="rwo7LS5GwFOTffDNCNRn-120">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="rwo7LS5GwFOTffDNCNRn-49" value="Get message from queue" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="rwo7LS5GwFOTffDNCNRn-2">
-          <mxGeometry x="80" y="43.52" width="108.64" height="36.48" as="geometry" />
+          <mxGeometry x="288.52" y="42.38" width="108.64" height="36.48" as="geometry" />
         </mxCell>
-        <mxCell id="rwo7LS5GwFOTffDNCNRn-72" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="rwo7LS5GwFOTffDNCNRn-2" source="rwo7LS5GwFOTffDNCNRn-50" target="rwo7LS5GwFOTffDNCNRn-51">
-          <mxGeometry relative="1" as="geometry" />
+        <mxCell id="rwo7LS5GwFOTffDNCNRn-72" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="rwo7LS5GwFOTffDNCNRn-2" source="rwo7LS5GwFOTffDNCNRn-50" target="rwo7LS5GwFOTffDNCNRn-51">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
         </mxCell>
         <mxCell id="rwo7LS5GwFOTffDNCNRn-50" value="Convert json to binary data" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="rwo7LS5GwFOTffDNCNRn-2">
-          <mxGeometry x="79.99" y="120" width="108.64" height="40" as="geometry" />
+          <mxGeometry x="288.52" y="200" width="108.64" height="40" as="geometry" />
         </mxCell>
         <mxCell id="rwo7LS5GwFOTffDNCNRn-73" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="rwo7LS5GwFOTffDNCNRn-2" source="rwo7LS5GwFOTffDNCNRn-51" target="rwo7LS5GwFOTffDNCNRn-52">
           <mxGeometry relative="1" as="geometry" />
@@ -294,6 +296,26 @@
             </Array>
           </mxGeometry>
         </mxCell>
+        <mxCell id="rwo7LS5GwFOTffDNCNRn-115" value="No" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="rwo7LS5GwFOTffDNCNRn-2" source="rwo7LS5GwFOTffDNCNRn-113" target="rwo7LS5GwFOTffDNCNRn-49">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rwo7LS5GwFOTffDNCNRn-113" value="Is virtual terminal locked?" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.decision;whiteSpace=wrap;" vertex="1" parent="rwo7LS5GwFOTffDNCNRn-2">
+          <mxGeometry x="20" y="40" width="200" height="41.24" as="geometry" />
+        </mxCell>
+        <mxCell id="rwo7LS5GwFOTffDNCNRn-118" value="Yes" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.115;entryY=0.637;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="rwo7LS5GwFOTffDNCNRn-2" source="rwo7LS5GwFOTffDNCNRn-113" target="rwo7LS5GwFOTffDNCNRn-113">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="120" y="101" />
+              <mxPoint x="43" y="101" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rwo7LS5GwFOTffDNCNRn-124" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="rwo7LS5GwFOTffDNCNRn-2" source="rwo7LS5GwFOTffDNCNRn-120" target="rwo7LS5GwFOTffDNCNRn-50">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rwo7LS5GwFOTffDNCNRn-120" value="Convert json to binary data" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" vertex="1" parent="rwo7LS5GwFOTffDNCNRn-2">
+          <mxGeometry x="288.52" y="120" width="108.64" height="40" as="geometry" />
+        </mxCell>
         <mxCell id="rwo7LS5GwFOTffDNCNRn-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="rwo7LS5GwFOTffDNCNRn-7" source="rwo7LS5GwFOTffDNCNRn-17" target="rwo7LS5GwFOTffDNCNRn-27">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
@@ -306,7 +328,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="rwo7LS5GwFOTffDNCNRn-110" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="rwo7LS5GwFOTffDNCNRn-7" source="rwo7LS5GwFOTffDNCNRn-27" target="rwo7LS5GwFOTffDNCNRn-49">
+        <mxCell id="rwo7LS5GwFOTffDNCNRn-116" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="rwo7LS5GwFOTffDNCNRn-7" source="rwo7LS5GwFOTffDNCNRn-27" target="rwo7LS5GwFOTffDNCNRn-113">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="QlflWRz0XI6yLBNZDTP6-26" value="Processor" style="swimlane;html=1;startSize=20;" vertex="1" parent="QlflWRz0XI6yLBNZDTP6-2">
