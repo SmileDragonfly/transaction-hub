@@ -31,7 +31,7 @@
   - if working key == NULL: Call processor to get working key for this virtual terminal => Update working key to DB => return working key
   - else: return working key
 - Diagram:
-  
+  ![Get working key](./diagram-GetWorkingKey.jpg)
 - Estimate:
   - Implement: 10h
   - Unit test: 4h
@@ -55,6 +55,8 @@
       - Parse response and update transaction state
       - Convert binary to json
       - Send response to producer
+- Diagram:
+  ![Payment](./diagram-Payment.jpg)
 - Estimate:
   - Research for producer and consumer mechanism: 7h
   - Implement producer logic: 7h
@@ -63,12 +65,15 @@
   - Total: 35h
 #### 1.3. Transaction check
 - Draft flow: Parse request => Query DB to check TRXN info and TRXN status => Return response
+- Diagram:
+  ![Payment](./diagram-TransactionCheck.jpg)
 - Estimate:
   - Implement: 7h
   - Unit test: 4h
   - Total: 11h
 #### 1.4. Balance Inquiry
 - Draft flow: Parse request => Same logic to payment request (Call to processor and change some fields) => Return response
+- Diagram: (same to payment diagram)
 - Estimate:
   - Implement: 7h
   - Unit test: 4h
@@ -76,6 +81,8 @@
 ### 2. Schedule Jobs
 #### 2.1. Get working key (interval=VT.Working key exchange interval)
 - Draft flow: Send request to processor to get working key for virtual terminal => Update working key to DB
+- Diagram:
+  ![Payment](./diagram-GetWorkingKey%20Job.jpg)
 - Estimate:
   - Implement: 7h
   - Unit test: 4h
@@ -83,6 +90,8 @@
 #### 2.2. Cash Position (interval=VT.HealCheck interval)
 - Draft flow: Check VT balance < VT.LowAmount => Send request to processor to do Cash Position (random [1000, 1500, 1800])
 => Check response => Success => Update VT Cassette infomation
+- Diagram:
+  ![Payment](./diagram-HealthCheck%20Job.jpg)
 - Estimate:
   - Implement: 7h
   - Unit test: 4h
