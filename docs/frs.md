@@ -13,10 +13,11 @@
 - Max time delay between transactions: MaxTDL
 - Timeout for request send from physical terminal to virtual terminal: PTTO
 - Timeout for request send from virtual terminal to processor: VTTO
+- Transaction: TRXN
 ## I. Overview
 - Language: Golang
 - Database: MS-SQL
-- Total estimation time: 154h
+- Total estimation time: 142h
 ## II. Transaction Hub APIs
 - APIs for PT (Post API.docx)
   - Get working key
@@ -26,31 +27,42 @@
 ## III. Transaction Hub Modules
 ### 1. API
 #### 1.1. Get working key
-- Draft flow: PT SN => PT ID => VT ID => Get VT WK from DB
-  - if WK == NULL: Call processor to get WK for this VT => Update WK to DB => return WK
-  - else: return WK
+- Draft flow: Serial number => Physical terminal ID => Virtual terminal ID => Get working key from DB
+  - if working key == NULL: Call processor to get working key for this virtual terminal => Update working key to DB => return working key
+  - else: return working key
+- Diagram:
+  
 - Estimate:
   - Implement: 10h
   - Unit test: 4h
   - Total: 14h
 #### 1.2. Request payment
 - Draft flow: 
-  - Provider thread: Push request to queue => Wait for reponse
-  - Consumer thread: Receive message => Get VT ID from PT SN => Check number pending message of VT (n) => Calculate time to wait (ATT*n + MaxTDL*(n-1)) to accept or reject request 
-    - If time to wait > (PTTO - ATT): Send reject response to provider thread
-    - else: When it picks message from queue:
-      - Calculate time need to delay (TDL): Random(MinTDL, MaxTDL) - (now() - time(last VT TXN))
-      - Check (message received time + PTTO) < now() + TDL + ATT:
-        - False: Send response reject process request because not enough time
-        - True: Process request => Convert PT request to VT request => Receive response from processor => Convert to PT response => Return to provider
+  - Producer thread: Push request to queue, create a timer(60) => Wait for response from consumer or if timer active => return 998
+  - Queue: Receive request
+  - Consumer thread: Check VT is locked
+    - Yes: Do nothing, sleep(1s) to check VT lock state again
+    - No:
+      - Read request and lock VT 
+      - Convert request json to binary
+      - Calculate time to wait: rand(min, max) - (now() - lastTrxnTime of VT)
+      - Create transaction record (state = create) before send request to processor
+      - Create a timer (processor timeout config) for response from processor
+      - Send request to processor
+        - If timeout: Update transaction state=fail because of processor timeout
+        - Send response transaction fail to producer
+      - Receive response from processor
+      - Parse response and update transaction state
+      - Convert binary to json
+      - Send response to producer
 - Estimate:
-  - Research for provider and consumer mechanism: 7h
-  - Implement provider logic: 7h
+  - Research for producer and consumer mechanism: 7h
+  - Implement producer logic: 7h
   - Implement consumer logic: 14h
   - Unit test: 7h
   - Total: 35h
 #### 1.3. Transaction check
-- Draft flow: Parse request => Query DB to check TXN info and TXN status => Return response
+- Draft flow: Parse request => Query DB to check TRXN info and TRXN status => Return response
 - Estimate:
   - Implement: 7h
   - Unit test: 4h
@@ -61,21 +73,9 @@
   - Implement: 7h
   - Unit test: 4h
   - Total: 11h
-#### 1.5. Add VT
-- Draft flow: Parse request => Update DB => Return response
-- Estimate:
-  - Implement: 4h
-  - Unit test: 2h
-  - Total: 6h
-#### 1.6. Add PT
-- Draft flow: Parse request => Update DB => Return response
-- Estimate:
-  - Implement: 4h
-  - Unit test: 2h
-  - Total: 6h
 ### 2. Schedule Jobs
 #### 2.1. Get working key (interval=VT.Working key exchange interval)
-- Draft flow: Send request to processor to get WK for VT => Update WK to DB
+- Draft flow: Send request to processor to get working key for virtual terminal => Update working key to DB
 - Estimate:
   - Implement: 7h
   - Unit test: 4h
@@ -88,7 +88,7 @@
   - Unit test: 4h
   - Total: 11h
 ### 3. Database package
-- Create package to query, update VT,PT,Transaction... to MSSQL
+- Create package to query and update virtual terminal,physical terminal, transaction, lock,... to MSSQL
 - Create interface for main package to call
 - Estimate:
   - Implement: 14h
